@@ -34,9 +34,9 @@ ENTRYPOINT ["/kickstart/run/entrypoint.sh"]
 > If you want to install software with `apt-get` or `npm` or `composer`. This stage
 > is the correct place to do it
 
-- [`/kickstart/build/ubuntu.d/`](kickstart/flavor/build.d): Installer directory for
+- [`/kickstart/flavor/build.d/`](kickstart/flavor/build.d): Installer directory for
   Ubuntu based containers. All scripts inside this directory will be executed when
-  `RUN /kickstart/build/build-ubuntu.sh` is executed during build.
+  `RUN /kickstart/flavor/build.sh` is executed during build.
 
 
 ### Run stage

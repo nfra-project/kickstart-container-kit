@@ -9,7 +9,7 @@ ADD /kickstart /kickstart
 ## Ignore ubuntu tools and other stuff for this image.
 RUN chmod -R 755 /kickstart \
     && /kickstart/_int_build/install-ckit.sh \
-    && /kickstart/flavor/build.d/99-setup-user-rights.sh \
+    && /kickstart/flavor/build.d/20-setup-user-rights.sh \
     && rm -rf /var/lib/apt/lists/*
 
 # ENV TIMEZONE Europe/Berlin

@@ -63,7 +63,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export GIT_EDITOR=vim
-export PATH="$PATH:/root/.composer/vendor/bin"
+export PATH="/root/.composer/vendor/bin:$PATH"
 
 . /kickstart/tools/select-console.sh default_root
 ## Change Dir to /opt

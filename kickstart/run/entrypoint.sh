@@ -160,6 +160,9 @@ then
 else
     colorText "DEVELOPMENT MODE STARTUP" 97 46
 
+    info "Running '$__DIR__/dev.d/'"
+    run_dir $__DIR__/dev.d
+
     if [ ! -f /etc/kick_build_done ]
     then
         info "Running 'kick build'"
@@ -176,8 +179,7 @@ else
         exit 0;
     fi;
 
-    info "Running '$__DIR__/dev.d/'"
-    run_dir $__DIR__/dev.d
+
 
     info "Running 'kick write_config_file'"
     sudo -E -s -u user kick write_config_file

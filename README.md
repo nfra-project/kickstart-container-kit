@@ -14,12 +14,12 @@ executor to easy configure and start services inside the container.
 ```dockerfile
 FROM nfra/kickstart-ckit:1.0 AS ckit
 
-FROM ubunut:18.04
+FROM ubuntu:18.04
 COPY --from=ckit /kickstart /kickstart
 
 # ... Do some modifications ...
 
-RUN chmod -R 755 /kickstart && /kickstart/build/build-ubuntu.sh
+RUN chmod -R 755 /kickstart && /kickstart/flavor/build.sh
 ENTRYPOINT ["/kickstart/run/entrypoint.sh"]
 ```
 

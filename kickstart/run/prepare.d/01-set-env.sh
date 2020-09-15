@@ -11,6 +11,8 @@ envtoset=`kick kick_to_env`
 debug "kick_to_env raw: $envtoset"
 ## Evaluate and replace $PATH in envtoset
 eval envtoset_parsed="\"$envtoset\""
-export $envtoset_parsed
+
+## Multiline needs to be evaled
+eval $envtoset_parsed
 
 

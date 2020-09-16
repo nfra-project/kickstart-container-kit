@@ -20,6 +20,16 @@ __DIR__=$(dirname $0)
 
 info "Entrypoint location '$0'";
 
+## Set the default environment for startup if no env
+# This data is used (unless specified in dockerfile), for ci-build and standalone startups
+
+[[ -z ${TIMEZONE} ]] || export TIMEZONE="Europe/Berlin"
+[[ -z ${DEV_MODE} ]] || export DEV_MODE="0"
+[[ -z ${DEV_CONTAINER_NAME} ]] || export DEV_CONTAINER_NAME="unnamed"
+[[ -z ${DEV_UID} ]] || export DEV_UID="1000"
+[[ -z ${DEV_TTYID} ]] || export DEV_TTYID="xXx"
+[[ -z ${WORKDIR} ]] || export WORKDIR="/opt"
+
 function on_error () {
     emergency "Error: ${PROGNAME} on line $1";
     echo "Error: ${PROGNAME} on line $1" 1>&2
@@ -54,10 +64,7 @@ function on_sigterm () {
     exit 0
 }
 
-if [ "$WORKDIR" = "" ]
-then
-    WORKDIR="/opt"
-fi;
+
 
 colorText "   >>   KICKSTART FLAVOR CONTAINER :: infracamp.org   <<   " 97 104
 info "Date: $(date), DevUID: '$DEV_UID', WorkDir: '$WORKDIR', ProjectName: '$DEV_CONTAINER_NAME', Parameters: '$@'"

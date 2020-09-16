@@ -12,12 +12,7 @@ RUN chmod -R 755 /kickstart \
     && /kickstart/flavor/build.d/30-setup-user-rights.sh \
     && rm -rf /var/lib/apt/lists/*
 
-ENV TIMEZONE Europe/Berlin
-ENV SYSLOG_HOST ""
-ENV DEV_MODE "0"
-ENV DEV_CONTAINER_NAME "unnamed"
-ENV DEV_UID "1000"
-ENV DEV_TTYID "xXx"
+
 
 
 # Use for debugging:

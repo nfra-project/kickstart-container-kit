@@ -7,7 +7,7 @@
 #
 
 
-envtoset=`kick kick_to_env`
+envtoset=`/kickstart/bin/kick kick_to_env`
 debug "kick_to_env raw: $envtoset"
 ## Evaluate and replace $PATH in envtoset
 

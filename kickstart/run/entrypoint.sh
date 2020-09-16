@@ -110,10 +110,10 @@ then
     colorText "     >> PRODUCTION MODE / STANDALONE <<    " 97 45
 
     info "Running 'kick write_config_file'"
-    sudo -E -s -u user kick write_config_file
+    sudo -E -s -u user /kickstart/bin/kick write_config_file
 
     info "Running 'kick init'"
-    sudo -E -s -u user kick init
+    sudo -E -s -u user /kickstart/bin/kick init
 
     info "Running '$__DIR__/start.d/'"
     run_dir $__DIR__/start.d
@@ -127,7 +127,7 @@ then
     if (( $# < 1 ))
     then
         info "Running default action (no parameters found): 'kick run'"
-        sudo -E -s -u user kick run
+        sudo -E -s -u user /kickstart/bin/kick run
     else
         info "skipping default action (parameter found)"
         for cmd in $@; do
@@ -143,7 +143,7 @@ then
                 exit 0;
             fi;
             info "Running 'kick $cmd'"
-            sudo -E -s -u user kick $cmd
+            sudo -E -s -u user /kickstart/bin/kick $cmd
         done
     fi;
 
@@ -153,7 +153,7 @@ then
     while [ true ]
     do
         set +e
-        sudo -E -s -u user kick interval
+        sudo -E -s -u user /kickstart/bin/kick interval
         sleep 60
     done
     exit 0
@@ -166,7 +166,7 @@ else
     if [ ! -f /etc/kick_build_done ]
     then
         info "Running 'kick build'"
-        sudo -E -s -u user kick build
+        sudo -E -s -u user /kickstart/bin/kick build
         touch /etc/kick_build_done
     else
         debug "/etc/kick_build_done exists - assuming wakeup action."
@@ -182,10 +182,10 @@ else
 
 
     info "Running 'kick write_config_file'"
-    sudo -E -s -u user kick write_config_file
+    sudo -E -s -u user /kickstart/bin/kick write_config_file
 
     info "Running 'kick init'"
-    sudo -E -s -u user kick init
+    sudo -E -s -u user /kickstart/bin/kick init
 
     info "Running '$__DIR__/start.d/'";
     run_dir $__DIR__/start.d
@@ -193,7 +193,7 @@ else
     if [ "$1" == "" ]
     then
         info "Running 'kick dev' (development mode)"
-        sudo -E -s -u user kick dev
+        sudo -E -s -u user /kickstart/bin/kick dev
 
         RUN_SHELL=1
     else
@@ -206,7 +206,7 @@ else
                 exit 0;
             fi;
             info "Running 'kick $cmd' (command)"
-            sudo -E -s -u user kick $cmd
+            sudo -E -s -u user /kickstart/bin/kick $cmd
         done
         RUN_SHELL=0
     fi;

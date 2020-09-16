@@ -12,7 +12,9 @@ RUN chmod -R 755 /kickstart \
     && /kickstart/flavor/build.d/30-setup-user-rights.sh \
     && rm -rf /var/lib/apt/lists/*
 
-
+##
+## ENV is not exported to importing container. Defaults
+## are set on top of entrypoint.sh (like DEV_UID, DEV_TTY,...)
 
 
 # Use for debugging:

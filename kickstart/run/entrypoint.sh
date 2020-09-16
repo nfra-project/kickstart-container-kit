@@ -23,12 +23,14 @@ info "Entrypoint location '$0'";
 ## Set the default environment for startup if no env
 # This data is used (unless specified in dockerfile), for ci-build and standalone startups
 
-[[ -z ${TIMEZONE} ]] || TIMEZONE="Europe/Berlin" && echo "Using default Timezone"
-[[ -z ${DEV_MODE} ]] || DEV_MODE="0"
-[[ -z ${DEV_CONTAINER_NAME} ]] || DEV_CONTAINER_NAME="unnamed"
-[[ -z ${DEV_UID} ]] || DEV_UID="1000" && echo "Using default Uid"
-[[ -z ${DEV_TTYID} ]] || DEV_TTYID="xXx"
-[[ -z ${WORKDIR} ]] || WORKDIR="/opt" && echo "Using default Workdir"
+# Setting defaults (if not defined as ENV)
+export TIMEZONE=${TIMEZONE:-Europe/Berlin}
+export WORKDIR=${WORKDIR:-/opt}
+export DEV_MODE=${DEV_MODE:-0}
+export DEV_UID=${DEV_UID:-1000}
+export DEV_TTYID=${DEV_TTYID:-xXx}
+export DEV_CONTAINER_NAME=${DEV_CONTAINER_NAME:-unnamed}
+
 
 function on_error () {
     emergency "Error: ${PROGNAME} on line $1";

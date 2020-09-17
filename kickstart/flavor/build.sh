@@ -11,3 +11,5 @@ do
 done
 
 rm -rf /var/lib/apt/lists/*
+rm -rf /root/.composer/cache/*
+

@@ -18,7 +18,7 @@ __DIR__=$(dirname $0)
 ## Include Libraries
 . $__DIR__/_inc/logging.sh
 
-info "Entrypoint location '$0'";
+echo "Entrypoint location '$0'";
 
 ## Set the default environment for startup if no env
 # This data is used (unless specified in dockerfile), for ci-build and standalone startups
@@ -26,16 +26,19 @@ info "Entrypoint location '$0'";
 # Setting defaults (if not defined as ENV)
 export TIMEZONE=${TIMEZONE:-Europe/Berlin}
 export WORKDIR=${WORKDIR:-/opt}
+export VERBOSITY=${VERBOSITY:-4}
 export DEV_MODE=${DEV_MODE:-0}
 export DEV_UID=${DEV_UID:-1000}
 export DEV_TTYID=${DEV_TTYID:-xXx}
 export DEV_CONTAINER_NAME=${DEV_CONTAINER_NAME:-unnamed}
 
 
+
 function on_error () {
     emergency "Error: ${PROGNAME} on line $1";
     echo "Error: ${PROGNAME} on line $1" 1>&2
-    echo "(Run './kickstart.sh :debug-shell' or './kickstart.sh :debug' to investigate the error)" 1>&2
+    echo "(Run './kickstart.sh :debug-shell' or './kickstart.sh :debug' to investigate the error" 1>&2
+    echo "or increase VERBOSITY by running './kickstart.sh -e VERBOSITY=7' to see full output)" 1>&2
     exit 1
 }
 
@@ -69,7 +72,7 @@ function on_sigterm () {
 
 
 colorText "   >>   KICKSTART FLAVOR CONTAINER :: infracamp.org   <<   " 97 104
-info "Date: $(date), DevUID: '$DEV_UID', WorkDir: '$WORKDIR', ProjectName: '$DEV_CONTAINER_NAME', Parameters: '$@'"
+warn "Date: '$(date)', DevUID: '$DEV_UID', WorkDir: '$WORKDIR', ProjectName: '$DEV_CONTAINER_NAME', Parameters: '$@'"
 
 ## Set kickstart bin as path (otherwise kick isn't found)
 PATH=/kickstart/bin:$PATH
@@ -106,7 +109,7 @@ fi
 
 
 
-info "Running '$__DIR__/prepare.d/' scripts"
+debug "Running '$__DIR__/prepare.d/' scripts"
 run_dir $__DIR__/prepare.d
 
 info "Changing work dir to $WORKDIR"

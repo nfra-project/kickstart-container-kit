@@ -145,6 +145,7 @@ kick should run on? Which .kick.yml to interpret?
 | TIMEZONE      | Europe/Berlin | The locale timezone                |
 | DEV_UID       | 1000    | The numeric uid of the developer (user will be adjusted to this id)  |
 | DEV_CONTAINER_NAME |    | The name to be presented on development time                         |
+| VERBOSITY     | 4       | Default: show only warnings and more severe messages                 |
 
 
 

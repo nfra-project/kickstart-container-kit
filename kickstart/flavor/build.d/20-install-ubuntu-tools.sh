@@ -16,8 +16,8 @@ else
 
     # Install raw packages (reduce size)
     apt-get install -y --no-install-recommends git openssh-client vim pwgen telnet
+    locale-gen en_US.UTF-8
 fi;
 # Packages that have less recommends
 
 
-locale-gen en_US.UTF-8

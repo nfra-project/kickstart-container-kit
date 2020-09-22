@@ -7,7 +7,7 @@ set -e
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
-
+apt-get upgrade -y
 
 # Bug in Ubuntu18.04. You have to install tzdata standalone first!
 apt-get install -y --no-install-recommends tzdata

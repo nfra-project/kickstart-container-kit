@@ -8,8 +8,8 @@ set -e
 #
 
 
-mkfifo -m 777 /dev/log
+mkfifo -m 777 /dev/c_log
 
 # Output stuff arriving at /dev/log
-tail -f /dev/log &
+tail -f /dev/c_log &
 

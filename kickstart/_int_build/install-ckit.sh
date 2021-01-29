@@ -21,7 +21,7 @@ cp sapi/cli/php /kickstart/bin/_kick_php
 
 
 ## Install Kicker
-composer create-project nfra/kicker /kickstart/lib/kicker --no-dev
+composer create-project nfra/kicker:1.3.0 /kickstart/lib/kicker --no-dev
 
 ## Clean up after build
 rm -R /tmp/*

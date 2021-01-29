@@ -7,10 +7,10 @@ apt-get update
 apt-get install -y php7.2-dev php-yaml composer bison re2c git sudo
 
 ## Compile embedded php
-curl -L https://github.com/php/php-src/archive/php-7.4.6.tar.gz --output /tmp/php.tar.gz
+curl -L https://github.com/php/php-src/archive/php-7.4.14.tar.gz --output /tmp/php.tar.gz
 cd /tmp
 tar -xzf php.tar.gz
-cd  php-src-php-7.4.6/
+cd  php-src-php-7.4.14/
 ./buildconf --force
 ./configure --enable-static --enable-json --enable-cli --enable-pcntl --disable-all
 make

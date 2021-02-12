@@ -193,10 +193,10 @@ else
 
 
 
-    info "Running 'kick write_config_file'"
-    sudo -E -s -u user /kickstart/bin/kick write_config_file
+    info "Running 'kick write_config_file' (root)"
+    /kickstart/bin/kick write_config_file
 
-    info "Running 'kick init'"
+    info "Running 'kick init' (user)"
     sudo -E -s -u user /kickstart/bin/kick init
 
     info "Running '$__DIR__/start.d/'";

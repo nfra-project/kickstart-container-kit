@@ -7,10 +7,10 @@ apt-get update
 apt-get install -y php7.2-dev php-yaml composer bison re2c git sudo
 
 ## Compile embedded php
-curl -L https://github.com/php/php-src/archive/php-7.4.14.tar.gz --output /tmp/php.tar.gz
+curl -L https://github.com/php/php-src/archive/php-7.4.15.tar.gz --output /tmp/php.tar.gz
 cd /tmp
 tar -xzf php.tar.gz
-cd  php-src-php-7.4.14/
+cd  php-src-php-7.4.15/
 ./buildconf --force
 ./configure --enable-static --enable-json --enable-cli --enable-pcntl --disable-all
 make
@@ -21,7 +21,7 @@ cp sapi/cli/php /kickstart/bin/_kick_php
 
 
 ## Install Kicker
-composer create-project nfra/kicker:1.3.0 /kickstart/lib/kicker --no-dev
+composer create-project nfra/kicker:1.4.0 /kickstart/lib/kicker --no-dev
 
 ## Clean up after build
 rm -R /tmp/*

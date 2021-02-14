@@ -78,17 +78,17 @@ old versions alive and available.
 There is no `latest` nor `testing` tag on this image. The version has to be specified
 and will be updated only in case of backward compatibility.
 
-We will build a tested and stable version on the tag `1.0` at least once per week.
+We will build a tested and stable version on the tag `1.2` at least once per week.
 
 If you prefer a stable version, use one of the versioned `static-x.x.x`. These images
 will not be updated.
 
-> We suggest to use the stable, regulary updated version `1.0`. It will stay 
+> We suggest to use the stable, regulary updated version `1.2`. It will stay 
 > backwards compatible during its lifetime. 
 
 | Image Version                      | Regular updates    | Stable  | Purpose | Branch |
 |------------------------------------|--------------------|---------|---------|--------|
-| `nfra/kickstart-ckit:1.0`          | YES (1x per week)  | YES     | Use this for Production                   | stable-1.0    |
+| `nfra/kickstart-ckit:1.2`          | YES (1x per week)  | YES     | Use this for Production                   | stable-1.0    |
 | `nfra/kickstart-ckit:1.0-rc`       | YES daily          | NO      | Development Release candidate (master)    | master        |
 | `nfra/kickstart-ckit:1.0.x`        | NO (static image)  | YES     | Use if you prefer static images or want to compare with older versions | (tag) |
 

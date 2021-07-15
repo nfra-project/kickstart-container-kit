@@ -47,7 +47,9 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export GIT_EDITOR=vim
-export PATH=/kickstart/bin:$PATH
+
+# Load path from file
+. /etc/kick_bashrc.d/path
 
 . /kickstart/tools/select-console.sh default
 
@@ -64,7 +66,9 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export GIT_EDITOR=vim
-export PATH="/kickstart/bin:/root/.composer/vendor/bin:$PATH"
+
+# Load path from file
+. /etc/kick_bashrc.d/path
 
 . /kickstart/tools/select-console.sh default_root
 ## Change Dir to /opt

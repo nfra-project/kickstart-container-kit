@@ -49,6 +49,7 @@ export LANGUAGE=en_US.UTF-8
 export GIT_EDITOR=vim
 
 # Load path from file
+. /etc/kick_bashrc.d/workdir
 . /etc/kick_bashrc.d/path
 
 . /kickstart/tools/select-console.sh default
@@ -67,7 +68,9 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 export GIT_EDITOR=vim
 
+
 # Load path from file
+. /etc/kick_bashrc.d/workdir
 . /etc/kick_bashrc.d/path
 
 . /kickstart/tools/select-console.sh default_root

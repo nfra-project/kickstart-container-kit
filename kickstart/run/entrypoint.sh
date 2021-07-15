@@ -70,8 +70,8 @@ function on_sigterm () {
 }
 
 function kicker_init() {
-    info "Running 'kick write_config_file'"
-    sudo -E -s -u user /bin/bash -c "/kickstart/bin/kick write_config_file"
+    info "Running 'kick write_config_file' (as root)"
+    /bin/bash -c "/kickstart/bin/kick write_config_file"
 
     info "Running 'kick init'"
     sudo -E -s -u user /bin/bash -c "/kickstart/bin/kick init"

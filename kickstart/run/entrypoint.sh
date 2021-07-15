@@ -69,6 +69,16 @@ function on_sigterm () {
     exit 0
 }
 
+function kicker_init() {
+    info "Running 'kick write_config_file'"
+    sudo -E -s -u user /bin/bash -c kick write_config_file
+
+    info "Running 'kick init'"
+    sudo -E -s -u user /bin/bash -c kick init
+
+    info "Running '$__DIR__/start.d/'"
+    run_dir $__DIR__/start.d
+}
 
 
 colorText "   >>   KICKSTART FLAVOR CONTAINER :: infracamp.org   <<   " 97 104
@@ -121,14 +131,7 @@ then
 
     colorText "     >> PRODUCTION MODE / STANDALONE <<    " 97 45
 
-    info "Running 'kick write_config_file' (root)"
-    /kickstart/bin/kick write_config_file
-
-    info "Running 'kick init' (user)"
-    sudo -E -s -u user /kickstart/bin/kick init
-
-    info "Running '$__DIR__/start.d/'"
-    run_dir $__DIR__/start.d
+    kicker_init
 
 
     ## Registering SIGTERM trap to assure graceful container shutdown
@@ -139,14 +142,14 @@ then
     if (( $# < 1 ))
     then
         info "Running default action (no parameters found): 'kick run'"
-        sudo -E -s -u user /kickstart/bin/kick run
+        sudo -E -s -u user /bin/bash -c /kickstart/bin/kick run
     else
         info "skipping default action (parameter found)"
         for cmd in $@; do
             if [ "$cmd" == "bash" ]
             then
                 info "command 'bash' found - starting bash"
-                sudo -E -s -u user /bin/bash
+                sudo -E -s -u user /bin/bash -c /bin/bash
                 exit 0;
             fi;
             if [ "$cmd" == "exit" ]
@@ -155,7 +158,7 @@ then
                 exit 0;
             fi;
             info "Running 'kick $cmd'"
-            sudo -E -s -u user /kickstart/bin/kick $cmd
+            sudo -E -s -u user /bin/bash -c /kickstart/bin/kick $cmd
         done
     fi;
 
@@ -165,7 +168,7 @@ then
     while [ true ]
     do
         set +e
-        sudo -E -s -u user /kickstart/bin/kick interval
+        sudo -E -s -u user /bin/bash -c /kickstart/bin/kick interval
         sleep 60
     done
     exit 0
@@ -178,7 +181,7 @@ else
     if [ ! -f /etc/kick_build_done ]
     then
         info "Running 'kick build'"
-        sudo -E -s -u user /kickstart/bin/kick build
+        sudo -E -s -u user /bin/bash -c /kickstart/bin/kick build
         touch /etc/kick_build_done
     else
         debug "/etc/kick_build_done exists - assuming wakeup action."
@@ -193,19 +196,12 @@ else
 
 
 
-    info "Running 'kick write_config_file' (root)"
-    /kickstart/bin/kick write_config_file
-
-    info "Running 'kick init' (user)"
-    sudo -E -s -u user /kickstart/bin/kick init
-
-    info "Running '$__DIR__/start.d/'";
-    run_dir $__DIR__/start.d
+    kicker_init;
 
     if [ "$1" == "" ]
     then
         info "Running 'kick dev' (development mode)"
-        sudo -E -s -u user /kickstart/bin/kick dev
+        sudo -E -s -u user user /bin/bash -c /kickstart/bin/kick dev
 
         RUN_SHELL=1
     else
@@ -218,7 +214,7 @@ else
                 exit 0;
             fi;
             info "Running 'kick $cmd' (command)"
-            sudo -E -s -u user /kickstart/bin/kick $cmd
+            sudo -E -s -u user user /bin/bash -c /kickstart/bin/kick $cmd
         done
         RUN_SHELL=0
     fi;

@@ -84,10 +84,6 @@ function kicker_init() {
 colorText "   >>   KICKSTART FLAVOR CONTAINER :: infracamp.org   <<   " 97 104
 warn "Date: '$(date)', DevUID: '$DEV_UID', WorkDir: '$WORKDIR', ProjectName: '$DEV_CONTAINER_NAME', Parameters: '$@'"
 
-## Set kickstart bin as path (otherwise kick isn't found)
-PATH=/kickstart/bin:$PATH
-
-
 
 if [ "$1" = "debug" ] || [ "$2" = "debug" ]
 then

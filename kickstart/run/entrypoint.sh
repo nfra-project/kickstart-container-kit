@@ -197,7 +197,7 @@ else
     if [ "$1" == "" ]
     then
         info "Running 'kick dev' (development mode)"
-        sudo -E -s -u user user /bin/bash -c "/kickstart/bin/kick dev"
+        sudo -E -s -u user /bin/bash -c "/kickstart/bin/kick dev"
 
         RUN_SHELL=1
     else

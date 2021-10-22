@@ -88,8 +88,9 @@ will not be updated.
 
 | Image Version                      | Regular updates    | Stable  | Purpose | Branch |
 |------------------------------------|--------------------|---------|---------|--------|
-| `nfra/kickstart-ckit:1.2`          | YES (1x per week)  | YES     | Use this for Production                   | stable-1.0    |
-| `nfra/kickstart-ckit:1.0-rc`       | YES daily          | NO      | Development Release candidate (master)    | master        |
+| `ghcr.io/nfra-project/kickstart-container-kit:1.2`      | YES (1x per week)  | YES     | Use this for Production                   | release/1.2    |
+| `ghcr.io/nfra-project/kickstart-container-kit:testing`  | YES (1x per week)  | YES     | Use this for Production                   | release/1.2    |
+| `nfra/kickstart-ckit:unstable`     | YES daily          | NO      | Development Release candidate (master)    | master        |
 | `nfra/kickstart-ckit:1.0.x`        | NO (static image)  | YES     | Use if you prefer static images or want to compare with older versions | (tag) |
 
 ### Alternative Hardware Architectures

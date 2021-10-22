@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: Build
         run: "CI_BUILD_NAME=${GITHUB_REF#refs/heads/release/} && CI_REGISTRY_IMAGE=$CI_REGISTRY/$GITHUB_REPOSITORY && env && ./.kicker/kickstart.static.sh ci_build"
-        with:
+        env:
           CI_REGISTRY: ghcr.io
           CI_REGISTRY_USER: giblab-user
           CI_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}

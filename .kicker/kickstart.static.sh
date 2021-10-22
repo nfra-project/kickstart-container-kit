@@ -445,7 +445,7 @@ run_shell() {
 versionFile="${PROJECT_PATH}/VERSION"
 
 _write_version_file_real() {
-    [ -f $versionFile ] || return; # Skip if VERSION is not present
+    [ -f $versionFile ] || return 0; # Skip if VERSION is not present
 
     echo "Updating Version file $versionFile";
 

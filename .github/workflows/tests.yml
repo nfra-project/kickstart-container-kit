@@ -2,7 +2,16 @@ name: tests
 
 on: [push]
 
+permissions:
+  
+
 jobs:
+  build_and_push_github:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+
   build:
 
     runs-on: ubuntu-latest

@@ -507,7 +507,7 @@ _ci_build() {
         echo "Push successful (Image: $taggedImageName)..."
     fi;
 
-    exit
+    exit 0
 }
 
 
@@ -728,7 +728,7 @@ while [ "$#" -gt 0 ]; do
 
     ci-build|--ci-build)
         _ci_build $2 $3
-        exit0;;
+        exit 0;;
 
     help|-h|--help)
         _usage

@@ -1,6 +1,9 @@
 ## From: github.com/nfra-project/nfra-skel
 ##
-## Build
+## Build on push to braches
+##
+## Examples
+## Branch: release/1.1   -> ghcr.io/some/repo:1.1
 
 name: release_build_and_push_to_github
 
@@ -9,7 +12,7 @@ name: release_build_and_push_to_github
 on:
   push:
     branches:
-      - release-[0-9.]+
+      - release/[0-9.]+
 
 jobs:
   build_and_push_github:
@@ -19,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Build
-        run: "CI_BUILD_NAME=${GITHUB_REF#refs/heads/release-} && CI_REGISTRY_IMAGE=$CI_REGISTY/$GITHUB_REPOSITORY && env && ./.kicker/kickstart.static.sh -ci_build"
+        run: "CI_BUILD_NAME=${GITHUB_REF#refs/heads/release/} && CI_REGISTRY_IMAGE=$CI_REGISTRY/$GITHUB_REPOSITORY && env && ./.kicker/kickstart.static.sh ci_build"
         with:
           CI_REGISTRY: ghcr.io
           CI_REGISTRY_USER: giblab-user

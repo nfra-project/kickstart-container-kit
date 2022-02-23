@@ -25,12 +25,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: Build
         run: |  
-          CI_BUILD_NAME=${GITHUB_REF#refs/heads/release/} 
-          echo "CI_BUILDNAME: $CI_BUILD_NAME"
-          CI_BUILD_NAME=${CI_BUILD_NAME#refs/tags/} 
-          echo "CI_BUILDNAME: $CI_BUILD_NAME"
-          CI_REGISTRY_IMAGE=$CI_REGISTRY/$GITHUB_REPOSITORY 
-          ./.kicker/kickstart.static.sh ci-build
+          CI_BUILD_NAME=${GITHUB_REF#refs/heads/release/} CI_BUILD_NAME=${CI_BUILD_NAME#refs/tags/} CI_REGISTRY_IMAGE=$CI_REGISTRY/$GITHUB_REPOSITORY ./.kicker/kickstart.static.sh ci-build
         env:
           CI_REGISTRY: ghcr.io
           CI_REGISTRY_USER: giblab-user

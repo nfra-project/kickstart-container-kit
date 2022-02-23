@@ -24,9 +24,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Build
-        run: |
+        run: |  
           CI_BUILD_NAME=${GITHUB_REF#refs/heads/release/} 
+          echo "CI_BUILDNAME: $CI_BUILD_NAME"
           CI_BUILD_NAME=${CI_BUILD_NAME#refs/tags/} 
+          echo "CI_BUILDNAME: $CI_BUILD_NAME"
           CI_REGISTRY_IMAGE=$CI_REGISTRY/$GITHUB_REPOSITORY 
           ./.kicker/kickstart.static.sh ci-build
         env:

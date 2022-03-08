@@ -18,8 +18,6 @@ make
 cp sapi/cli/php /kickstart/bin/_kick_php
 
 
-
-
 ## Install Kicker
 composer create-project nfra/kicker:dev-master /kickstart/lib/kicker --no-dev
 

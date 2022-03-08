@@ -11,8 +11,9 @@ executor to easy configure and start services inside the container.
 
 ## TL;DR: Building containers
 
+
 ```dockerfile
-FROM nfra/kickstart-ckit:1.0 AS ckit
+FROM nfra/kickstart-ckit:1.4 AS ckit
 
 FROM ubuntu:18.04
 COPY --from=ckit /kickstart /kickstart

@@ -7,38 +7,46 @@ function colorText() {
     local fg=$2
     local bg=$3
     local tp=1;
-    echo -e "\e[$bg;$tp;${fg}m$msg\e[0m";
+
+    if [[ $bg -ge 40 ]]; then
+        ((tp=30+$fg))
+        echo -e "\e[$tp;${bg}m$msg\e[0m";
+    else
+        echo -e "\e[$bg;$tp;${fg}m$msg\e[0m";
+    fi
 }
 
 function header() {
     local msg=$1;
     local fg=97; local tp=1; bg=44;
-    echo -e "\e[$bg;$tp;${fg}m$msg\e[0m";
+    colorText "$msg" "$fg" "$bg"
 }
 
 function debug() {
     (( $VERBOSITY < 7 )) && return;
     local msg=$1;
     local fg=37; local tp=0;
-    echo -e "\e[$tp;${fg}m[$LOGNAME] $1\e[0m";
+    colorText "[$LOGNAME] $msg" "$fg" "0"
 }
 
 function info() {
     (( $VERBOSITY < 6 )) && return;
     local msg=$1;
     local fg=34; local tp=2;
-    echo -e "\e[$tp;${fg}m[$LOGNAME] $1\e[0m";
+    colorText "[$LOGNAME] $msg" "$fg" "0"
 }
+
 function warn() {
     (( $VERBOSITY < 4 )) && return;
     local PROGNAME=$(basename $0)
     local msg=$1;
     local fg=33; local tp=2;
-    echo -e "\e[$tp;${fg}m[$LOGNAME] $1\e[0m";
+    colorText "[$LOGNAME] $msg" "$fg" "0"
 }
+
 function emergency() {
     (( $VERBOSITY < 0 )) && return;
     local msg=$1;
     local fg=101; local tp=1; bg=44;
-    echo -e "\e[$bg;$tp;${fg}m\n$msg\e[0m";
+    colorText "\n$msg" "$fg" "$bg"
 }

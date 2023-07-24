@@ -28,7 +28,7 @@ export TIMEZONE=${TIMEZONE:-Europe/Berlin}
 export WORKDIR=${WORKDIR:-/opt}
 
 # Determin UID of workdir (for ci-builds)
-local workdir_uid=$(stat -c '%u' $WORKDIR);
+workdir_uid=$(stat -c '%u' $WORKDIR);
 # Print warning If Workdir UID is not $DEV_UID, we need to change it
 
 if [ "$workdir_uid" != "$DEV_UID" ]

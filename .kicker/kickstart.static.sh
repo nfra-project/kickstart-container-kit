@@ -482,7 +482,7 @@ _ci_build() {
 
     local imageName="$CI_REGISTRY_IMAGE:$CI_BUILD_NAME"
 
-    CMD="docker build --pull -e VERBOSITY=9 -e DEV_UID=1001 -t $imageName -f ./Dockerfile ."
+    CMD="docker build --pull -t $imageName -f ./Dockerfile ."
     echo "[Building] Running '$CMD' (MODE1)";
     eval $CMD
 

@@ -26,9 +26,13 @@ echo "Entrypoint location '$0'";
 # Setting defaults (if not defined as ENV)
 export TIMEZONE=${TIMEZONE:-Europe/Berlin}
 export WORKDIR=${WORKDIR:-/opt}
+
+// Determin UID of workdir (for ci-builds)
+local workdir_uid=$(stat -c '%u' $WORKDIR);
+
 export VERBOSITY=${VERBOSITY:-4}
 export DEV_MODE=${DEV_MODE:-0}
-export DEV_UID=${DEV_UID:-1000}
+export DEV_UID=${DEV_UID:-$workdir_uid}
 export DEV_TTYID=${DEV_TTYID:-xXx}
 export DEV_CONTAINER_NAME=${DEV_CONTAINER_NAME:-unnamed}
 

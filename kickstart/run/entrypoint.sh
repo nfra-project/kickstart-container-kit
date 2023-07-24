@@ -27,14 +27,24 @@ echo "Entrypoint location '$0'";
 export TIMEZONE=${TIMEZONE:-Europe/Berlin}
 export WORKDIR=${WORKDIR:-/opt}
 
-// Determin UID of workdir (for ci-builds)
+# Determin UID of workdir (for ci-builds)
 local workdir_uid=$(stat -c '%u' $WORKDIR);
+# Print warning If Workdir UID is not $DEV_UID, we need to change it
+
+if [ "$workdir_uid" != "$DEV_UID" ]
+then
+    warn "Workdir UID ($workdir_uid) is not equal to DEV_UID ($DEV_UID)."
+    warn "This will cause permission errors on ci-builds."
+    warn "Please set DEV_UID to $workdir_uid or change the workdir to a directory with UID $DEV_UID"
+fi;
+
 
 export VERBOSITY=${VERBOSITY:-4}
 export DEV_MODE=${DEV_MODE:-0}
 export DEV_UID=${DEV_UID:-$workdir_uid}
 export DEV_TTYID=${DEV_TTYID:-xXx}
 export DEV_CONTAINER_NAME=${DEV_CONTAINER_NAME:-unnamed}
+
 
 
 
@@ -86,7 +96,7 @@ function kicker_init() {
 
 
 colorText "   >>   KICKSTART FLAVOR CONTAINER :: infracamp.org   <<   " 97 104
-warn "Date: '$(date)', DevUID: '$DEV_UID', WorkDir: '$WORKDIR', ProjectName: '$DEV_CONTAINER_NAME', VERBOSITY: $VERBOSITY, Parameters: '$@'"
+warn "Date: '$(date)', DevUID: '$DEV_UID', WorkDir: '$WORKDIR', WorkDirUid: '$workdir_uid' ProjectName: '$DEV_CONTAINER_NAME', VERBOSITY: $VERBOSITY, Parameters: '$@'"
 
 
 if [ "$1" = "debug" ] || [ "$2" = "debug" ]

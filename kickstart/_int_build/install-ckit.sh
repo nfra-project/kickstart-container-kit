@@ -4,7 +4,7 @@ set -Eeo pipefail
 
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
-apt-get install -y php7.2-dev php-yaml composer bison re2c git sudo
+apt-get install -y php8.3-dev php-yaml composer bison re2c git sudo
 
 ## Compile embedded php
 curl -L https://github.com/php/php-src/archive/php-7.4.15.tar.gz --output /tmp/php.tar.gz
@@ -23,6 +23,6 @@ composer create-project nfra/kicker:dev-master /kickstart/lib/kicker --no-dev
 
 ## Clean up after build
 rm -R /tmp/*
-sudo apt-get remove -y --purge php7.2-dev bison re2c composer
+sudo apt-get remove -y --purge php8.3-dev bison re2c composer
 sudo apt-get autoremove -y
 

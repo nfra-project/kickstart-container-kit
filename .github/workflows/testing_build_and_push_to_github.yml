@@ -33,7 +33,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build & Push
+      - name: Determine CI Branch and Image Name
         run: |
           CI_BRANCH=$(git tag)
           echo "CI_BRANCH 1: $CI_BRANCH"
@@ -45,7 +45,7 @@ jobs:
           echo "CI_BRANCH 2: $CI_BRANCH"
           CI_BUILD_NAME=${CI_BRANCH#release/}
           CI_BUILD_NAME=${CI_BUILD_NAME#refs/tags/release/}
-          CI_REGISTRY_IMAGE=$CI_REGISTRY/$GITHUB_REPOSITORY:$CI_BUILD_NAME
+          CI_REGISTRY_IMAGE=ghcr.io$CI_REGISTRY/$GITHUB_REPOSITORY:$CI_BUILD_NAME
           echo "Final image name: $CI_REGISTRY_IMAGE"
           echo "CI_REGISTRY_IMAGE=$CI_REGISTRY_IMAGE" >> $GITHUB_ENV
 

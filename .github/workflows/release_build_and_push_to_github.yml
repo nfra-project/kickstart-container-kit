@@ -38,7 +38,6 @@ jobs:
           CI_BUILD_NAME=${CI_BUILD_NAME#refs/tags/release/}
           CI_REGISTRY_IMAGE=$CI_REGISTRY/$GITHUB_REPOSITORY:$CI_BUILD_NAME
           echo "Final image name: $CI_REGISTRY_IMAGE"
-          docker tag test/image $CI_REGISTRY_IMAGE
           echo "$CI_REGISTRY_PASSWORD" | docker login --username $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
           docker buildx create --use       # create and switch to a new builder
           docker buildx inspect --bootstrap  # init builder

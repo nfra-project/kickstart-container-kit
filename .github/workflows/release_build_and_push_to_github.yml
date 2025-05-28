@@ -23,13 +23,28 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v1
-      - name: Build
-        run: |  
-          CI_BUILD_NAME=${GITHUB_REF#refs/heads/release/} CI_BUILD_NAME=${CI_BUILD_NAME#refs/tags/release/} CI_REGISTRY_IMAGE=$CI_REGISTRY/$GITHUB_REPOSITORY ./.kicker/kickstart.static.sh ci-build
+
+      - name: Build & Push
+        run: |
+          CI_BRANCH=$(git tag)
+          echo "CI_BRANCH 1: $CI_BRANCH"
+          [[ "$CI_BRANCH" == "" ]] && CI_BRANCH=$(git branch --show-current)
+          echo "CI_BRANCH 2: $CI_BRANCH"
+          [[ "$CI_BRANCH" == "master" ]] && CI_BRANCH=unstable
+          echo "CI_BRANCH 3: $CI_BRANCH"
+          [[ "$CI_BRANCH" == "main" ]] && CI_BRANCH=unstable
+          echo "CI_BRANCH 2: $CI_BRANCH"
+          CI_BUILD_NAME=${CI_BRANCH#release/}
+          CI_BUILD_NAME=${CI_BUILD_NAME#refs/tags/release/}
+          CI_REGISTRY_IMAGE=$CI_REGISTRY/$GITHUB_REPOSITORY:$CI_BUILD_NAME
+          echo "Final image name: $CI_REGISTRY_IMAGE"
+          echo "$CI_REGISTRY_PASSWORD" | docker login --username $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+          docker buildx create --use       # create and switch to a new builder
+          docker buildx inspect --bootstrap  # init builder
+          docker buildx build --platform linux/amd64,linux/arm64 --pull --no-cache --push -t $CI_REGISTRY_IMAGE .
         env:
           CI_REGISTRY: ghcr.io
           CI_REGISTRY_USER: giblab-user
           CI_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-
 
 

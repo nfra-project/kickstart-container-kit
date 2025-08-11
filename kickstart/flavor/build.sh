@@ -9,7 +9,7 @@ mkdir /etc/kick_bashrc.d/
 echo "export WORKDIR=$WORKDIR" > /etc/kick_bashrc.d/workdir
 echo "export PATH=/kickstart/bin:\$WORKDIR/bin:$PATH" > /etc/kick_bashrc.d/path
 
-## Write history dirctly to bashhistory:
+## Write history directly to bashhistory:
 
 echo "shopt -s histappend" >> /etc/bash.bashrc
 echo "PROMPT_COMMAND='history -a'" >> /etc/bash.bashrc

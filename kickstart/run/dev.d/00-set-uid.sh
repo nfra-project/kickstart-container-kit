@@ -6,6 +6,12 @@
 
 debug "Changing userid of 'user' to '$DEV_UID'"
 
+
+
+
+
 usermod -u $DEV_UID user
-chown -R user /home/user
+find /home/user \
+  -path /home/user/.agents -prune -o \
+  -exec chown user {} +
 export HOME=/home/user
